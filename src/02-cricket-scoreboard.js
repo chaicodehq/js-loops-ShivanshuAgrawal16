@@ -31,5 +31,34 @@
  *   // => { totalRuns: 0, totalBalls: 0, wickets: 0, fours: 0, sixes: 0 }
  */
 export function cricketScoreboard(balls) {
-  // Your code here
+  if(!Array.isArray(balls) || balls.length === 0) return {totalRuns: 0, totalBalls: 0, wickets: 0, fours: 0, sixes: 0};
+  let totalRuns = 0, totalBalls = 0, wickets = 0, fours = 0, sixes = 0;
+  for(let i = 0;i < balls.length; i++) {
+    if(balls[i] === -1) {
+      wickets++;
+      totalBalls++;
+      if(wickets === 10) break;
+    } else if(balls[i] === 0) {
+      totalBalls++;
+    } else if(balls[i] === 1 || balls[i] === 2 || balls[i] === 3 || balls[i] === 5) {
+      totalRuns += balls[i];
+      totalBalls++;
+    } else if(balls[i] === 4) {
+      totalRuns += 4;
+      totalBalls++;
+      fours++;
+    } else if(balls[i] === 6) {
+      totalRuns += 6;
+      totalBalls++;
+      sixes++;
+    }
+  }
+
+  return {
+    totalRuns: totalRuns,
+    totalBalls: totalBalls,
+    wickets: wickets,
+    fours: fours,
+    sixes: sixes
+  }
 }
